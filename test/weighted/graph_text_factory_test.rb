@@ -1,4 +1,4 @@
-require_relative "minitest_helper.rb"
+require_relative "../minitest_helper.rb"
 require "graphos/weighted/graph"
 require "graphos/weighted/text_factory"
 
