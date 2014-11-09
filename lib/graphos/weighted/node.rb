@@ -1,5 +1,5 @@
 module Graphos
-  class WeightedGraph
+  module Weighted
 
     ##
     # This class represents a node in a weighted graph
@@ -25,6 +25,10 @@ module Graphos
 
       def neighbors
         @edges.map{|edge| edge.to}
+      end
+
+      def edge to
+        @edges.lazy.select{|e| e.to.index == to}.first
       end
     end
 

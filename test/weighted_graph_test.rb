@@ -1,9 +1,9 @@
 require_relative "minitest_helper.rb"
-require "graphos/weighted_graph"
+require "graphos/weighted/graph"
 
 class WeightedGraphTest < MiniTest::Test
   def test_initializing_and_size
-    graph = Graphos::WeightedGraph.new 10
+    graph = Graphos::Weighted::Graph.new 10
     assert_equal(10, graph.size)
   end
 
@@ -12,6 +12,11 @@ class WeightedGraphTest < MiniTest::Test
 
     assert_equal(5, graph[0].degree)
     assert_equal(7, graph[2].degree)
+  end
+
+  def test_edges
+    graph = example
+    assert_equal(3, graph.edge(0,1).weight)
   end
 
   def test_neighborhood
@@ -31,7 +36,7 @@ class WeightedGraphTest < MiniTest::Test
 private
   
   def example
-    graph = Graphos::WeightedGraph.new 4
+    graph = Graphos::Weighted::Graph.new 4
     graph.add_edge(0,1,3)
     graph.add_edge(0,2,2)
     graph.add_edge(1,2,5)

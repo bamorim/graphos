@@ -1,5 +1,5 @@
 module Graphos
-  class WeightedGraph
+  module Weighted
 
     ##
     # This class represents an edge in a weighted graph
