@@ -15,8 +15,8 @@ module Graphos
     end
 
     def add_edge from, to, weight
-      @nodes[from].add_edge(to,weight)
-      @nodes[to].add_edge(from,weight)
+      @nodes[from].add_edge(@nodes[to],weight)
+      @nodes[to].add_edge(@nodes[from],weight)
     end
 
     def [] i
