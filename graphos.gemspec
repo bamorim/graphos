@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["contato@bamorim.com", "pedrovolpi@poli.ufrj.br"]
   spec.summary       = %q{Educational gem to Graph Theory @ UFRJ}
   spec.description   = %q{This gems implements some graph algorithms and representations.}
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/bamorim/graphos"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
@@ -24,5 +24,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "minitest-reporters", "~> 1.0"
   spec.add_development_dependency "pry", "~>0.10"
 
-  spec.add_dependency "algorithms"
+  spec.add_dependency "algorithms", "~>0.6"
 end
