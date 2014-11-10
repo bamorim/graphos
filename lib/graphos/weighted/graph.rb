@@ -27,6 +27,10 @@ module Graphos
       def [] i
         @nodes[i]
       end
+
+      def each_node
+        @nodes.each{|n| yield n}
+      end
     end
 
   end

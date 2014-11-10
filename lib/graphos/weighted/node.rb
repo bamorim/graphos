@@ -5,14 +5,14 @@ module Graphos
     # This class represents a node in a weighted graph
 
     class Node
-      attr_reader :index
+      attr_reader :index, :edges
       def initialize index
         @index = index
         @edges = []
       end
 
       def add_edge to, weight
-        @edges << Edge.new(@index, to, weight)
+        @edges << Edge.new(self, to, weight)
       end
 
       def degree
