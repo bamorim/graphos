@@ -7,8 +7,7 @@ module Graphos
     # Runs the dijstra algorithm on a given graph
     # at a starting node
     # This uses a Heap to get the lightest edge
-    require "pry"
-    def self.dijkstra graph, node
+    def self.dijkstra graph, initial
       #OK? E o path?
       fathers = Array.new(graph.size)
 
@@ -18,7 +17,7 @@ module Graphos
       #OK #dist[v] = infinito
       costs = Array.new(graph.size, Float::INFINITY)
       #dist[s] = 0
-      costs[node.index] = 0
+      costs[initial] = 0
 
       #OK
       heap = Heap.new{|x,y| (costs[x] <=> costs[y]) == -1}
@@ -36,7 +35,7 @@ module Graphos
         #Selecione u em V-S, tal que dist[u] é mínima
         u = graph[idx]
         distu = costs[idx]
-        allPaths[idx] = Path.new([], distu)
+        allPaths[idx] ||= Path.new
         #Para cada vizinho v (edge.to) de u faça
         u.edges.each do |edge|
           #Se dist[v] > dist[u] + w(u,v) então
@@ -46,7 +45,7 @@ module Graphos
             update_cost.call(edge.to.index, distu + edge.weight)
             #criar o Path entre root e v
             #se existe já, tem q atualizar. O novo é o do pai + ele msm
-            allPaths[edge.to.index] = allPaths[u.index] + Path.new(edge.to.index, distu + edge.weight)
+            allPaths[edge.to.index] = allPaths[u.index] + Path.new(edge)
           end
         end
       end

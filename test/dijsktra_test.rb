@@ -12,8 +12,27 @@ class DijkstraTest < MiniTest::Test
     graph.add_edge 2, 4, 2
     graph.add_edge 2, 3, 4
 
-    dij = Graphos::Algorithm.dijkstra graph, graph[0]
+    dij = Graphos::Algorithm.dijkstra graph, 0
 
-    assert_equal([],dij[0])
+    assert_equal([],ipath(dij[0]))
+    assert_equal(0,dij[0].cost)
+
+    assert_equal([1],ipath(dij[1]))
+    assert_equal(2,dij[1].cost)
+
+    assert_equal([2],ipath(dij[2]))
+    assert_equal(1,dij[2].cost)
+
+    assert_equal([2,3],ipath(dij[3]))
+    assert_equal(5,dij[3].cost)
+
+    assert_equal([4],ipath(dij[4]))
+    assert_equal(1,dij[4].cost)
+  end
+
+private
+
+  def ipath path
+    path.path.map{|e| e.to.index}
   end
 end

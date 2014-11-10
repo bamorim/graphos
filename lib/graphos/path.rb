@@ -1,27 +1,33 @@
 
 require "algorithms"
 module Graphos
-	module Algorithm
-		include Containers
-		class Path
-			#um path é uma lista de nós e um custo
-			def initialize node, weight
-				#não sei pensar em OOzês
-				@cost = weight
-				@path = [node]
-			end
+  class Path
+    attr_reader :cost, :path
+    def initialize edge=nil
+      if edge
+        @cost = edge.weight
+        @path = [edge]
+      else
+        @cost = 0
+        @path = []
+      end
+    end
 
-			def addNode node, weight
-				@path += [node]
-				@cost += weight
-			end
+    def add_edge edge
+      if @path.last.to != edge.from
+        raise IncorrectPathError.new
+      end
+      @path += [node]
+      @cost += weight
+    end
 
-			def +(paf)
-				result = dup
-				result.@cost += paf.@cost
-				result.@path.concat(paf.@path)
-				return result
-			end
-		end
-	end
+    def merge! paf
+      @cost += paf.cost
+      @path = @path + paf.path
+    end
+
+    def + path
+      dup.tap{|d| d.merge! path }
+    end
+  end
 end
