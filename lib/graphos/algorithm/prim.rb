@@ -7,7 +7,6 @@ module Graphos
     # Runs the prim algorithm in order to
     # find a MST for a given graph.
 
-    require "pry"
     def self.prim graph, initial
       fathers = Array.new(graph.size)
 
