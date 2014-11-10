@@ -1,4 +1,3 @@
-require "algorithms"
 module Graphos
   ##
   # This class represents a collection of edges
