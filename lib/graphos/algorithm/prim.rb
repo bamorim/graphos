@@ -13,6 +13,7 @@ module Graphos
 
       costs = Array.new(graph.size, Float::INFINITY)
       costs[initial] = 0
+
       heap = Heap.new{|x,y| (costs[x] <=> costs[y]) == -1}
       (0..graph.size-1).each{|i| heap.push(i)}
 
