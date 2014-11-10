@@ -9,23 +9,17 @@ module Graphos
 
     require "pry"
     def self.prim graph, initial
-      result = Weighted::Graph.new graph.size
-
       fathers = Array.new(graph.size)
 
       costs = Array.new(graph.size, Float::INFINITY)
       costs[initial] = 0
       heap = Heap.new{|x,y| (costs[x] <=> costs[y]) == -1}
+      (0..graph.size-1).each{|i| heap.push(i)}
 
       update_cost = -> (idx,cost) do
         costs[idx] = cost
-        if heap.has_key?(idx)
-           heap.delete(idx)
-           heap.push(idx)
-        end
+        heap.change_key(idx,idx)
       end
-
-      (0..graph.size-1).each{|i| heap.push(i)}
 
       while idx=heap.pop
         node = graph[idx]
@@ -36,9 +30,10 @@ module Graphos
           end
         end
       end
+
+      result = Weighted::Graph.new graph.size
       fathers.each_with_index do |f,c|
         if f
-          puts "Linking #{f} <=> #{c}"
           result.add_edge(f, c, costs[c])
         end
       end
