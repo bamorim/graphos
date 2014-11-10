@@ -1,7 +1,13 @@
-
 require "algorithms"
 module Graphos
+  ##
+  # This class represents a collection of edges
+  # When adding an edge that does not start at
+  # the last node, it raises an error
+
   class Path
+    class IncorretPathError < StandardError; end
+
     attr_reader :cost, :path
     def initialize edge=nil
       if edge

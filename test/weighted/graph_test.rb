@@ -33,6 +33,15 @@ class WeightedGraphTest < MiniTest::Test
     assert_equal(3, graph[1].neighbors.size)
   end
 
+  def test_edge_overwrite
+    graph = Graphos::Weighted::Graph.new 2
+    graph.add_edge(0,1,2)
+    graph.add_edge(0,1,3)
+    assert_equal(3, graph.edge(0,1).weight)
+    assert_equal(1, graph[0].edges.count)
+    assert_equal(1, graph[1].edges.count)
+  end
+
 private
   
   def example

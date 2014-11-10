@@ -12,6 +12,8 @@ module Graphos
       end
 
       def add_edge to, weight
+        # Does a O(n) check deleting existing edges
+        @edges.delete_if{|n| n.to == to}
         @edges << Edge.new(self, to, weight)
       end
 
