@@ -8,7 +8,8 @@ class DijkstraTest < MiniTest::Test
 
     dij = Graphos::Algorithm.dijkstra graph, 0
 
-    assert_equal([99,16,7,66,9], ipath(dij[9]))
+    assert_equal(19, dij[9].cost)
+    assert_equal(24, dij[19].cost)
   end
   def test_dijskstra
     graph = Graphos::Weighted::Graph.new(5)
