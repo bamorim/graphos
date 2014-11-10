@@ -1,4 +1,3 @@
-require "algorithms"
 module Graphos
   module Algorithm
     ##
