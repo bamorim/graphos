@@ -3,6 +3,13 @@ require "graphos/weighted/graph"
 require "graphos/algorithm/dijkstra"
 
 class DijkstraTest < MiniTest::Test
+  def test_100
+    graph = Graphos::Weighted::TextFactory.read("test/fixtures/grafo_1.txt")
+
+    dij = Graphos::Algorithm.dijkstra graph, 0
+
+    assert_equal([99,16,7,66,9], ipath(dij[9]))
+  end
   def test_dijskstra
     graph = Graphos::Weighted::Graph.new(5)
     graph.add_edge 0, 1, 2

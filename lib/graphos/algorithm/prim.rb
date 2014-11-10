@@ -18,7 +18,10 @@ module Graphos
 
       update_cost = -> (idx,cost) do
         costs[idx] = cost
-        heap.change_key(idx,idx)
+        if(heap.has_key?(idx))
+          heap.delete(idx)
+          heap.push(idx)
+        end
       end
 
       while idx=heap.pop

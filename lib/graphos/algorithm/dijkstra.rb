@@ -25,13 +25,18 @@ module Graphos
 
       update_cost = -> (idx,cost) do
         costs[idx] = cost
-        heap.change_key(idx,idx)
+        if(heap.has_key?(idx))
+          heap.delete(idx)
+          heap.push(idx)
+        end
       end
 
+      count = 0
 
       #Para cada vértice v
       #enquanto heap (S-V) != 0
       while idx=heap.pop
+        count += 1
         #Selecione u em V-S, tal que dist[u] é mínima
         u = graph[idx]
         distu = costs[idx]
@@ -48,6 +53,9 @@ module Graphos
             allPaths[edge.to.index] = allPaths[u.index] + Path.new(edge)
           end
         end
+
+        # No more nodes!
+        break if(idx == heap.next)
       end
 
       allPaths
