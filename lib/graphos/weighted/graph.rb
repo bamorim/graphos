@@ -7,6 +7,7 @@ module Graphos
       require "graphos/weighted/node"
       require "graphos/weighted/edge"
 
+      attr_reader :nodes
 
       def initialize size
         @nodes = (0..size-1).map{|i| Node.new i }

@@ -21,4 +21,13 @@ class PrimTest < MiniTest::Test
     assert_equal(1, mst.edge(0,2).weight)
     assert_equal(4, mst.edge(2,3).weight)
   end
+
+  def test_100
+    graph = Graphos::Weighted::TextFactory.read("test/fixtures/grafo_1.txt")
+
+    mst = Graphos::Algorithm.prim graph, 0
+    sum = mst.nodes.map(&:edges).flatten.map(&:weight).reduce(:+)/2
+
+    assert_equal(253, sum)
+  end
 end

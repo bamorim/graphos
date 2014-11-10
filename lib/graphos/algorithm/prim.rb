@@ -1,8 +1,6 @@
 require "algorithms"
 module Graphos
   module Algorithm
-    include Containers
-
     ##
     # Runs the prim algorithm in order to
     # find a MST for a given graph.
@@ -13,18 +11,20 @@ module Graphos
       costs = Array.new(graph.size, Float::INFINITY)
       costs[initial] = 0
 
-      heap = Heap.new{|x,y| (costs[x] <=> costs[y]) == -1}
-      (0..graph.size-1).each{|i| heap.push(i)}
+      heap = BinaryHeap.new{|x,y| x.value <=> y.value}
+      heap.push(initial, 0)
 
       update_cost = -> (idx,cost) do
         costs[idx] = cost
-        if(heap.has_key?(idx))
-          heap.delete(idx)
-          heap.push(idx)
+        if heap.has_key? idx
+          heap.change idx, cost
+        else
+          heap.push idx, cost
         end
       end
 
-      while idx=heap.pop
+      while keyval=heap.pop
+        idx = keyval.key
         node = graph[idx]
         node.edges.each do |edge|
           if costs[edge.to.index] > edge.weight
