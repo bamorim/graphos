@@ -6,10 +6,10 @@ require 'graphos/version'
 Gem::Specification.new do |spec|
   spec.name          = "graphos"
   spec.version       = Graphos::VERSION
-  spec.authors       = ["Bernardo Amorim"]
-  spec.email         = ["contato@bamorim.com"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
+  spec.authors       = ["Bernardo Amorim", "Pedro Volpi"]
+  spec.email         = ["contato@bamorim.com", "pedrovolpi@poli.ufrj.br"]
+  spec.summary       = %q{Educational gem to Graph Theory @ UFRJ}
+  spec.description   = %q{This gems implements some graph algorithms and representations.}
   spec.homepage      = ""
   spec.license       = "MIT"
 
