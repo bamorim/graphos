@@ -1,4 +1,4 @@
-require "algorithms"
+require "graphos/binary_heap"
 require "graphos/path"
 module Graphos
   module Algorithm
