@@ -14,6 +14,8 @@ module Graphos
       heap = BinaryHeap.new{|x,y| x.value <=> y.value}
       heap.push(initial, 0)
 
+      visited = Array.new(graph.size, false)
+
       update_cost = -> (idx,cost) do
         costs[idx] = cost
         if heap.has_key? idx
@@ -25,9 +27,10 @@ module Graphos
 
       while keyval=heap.pop
         idx = keyval.key
+        visited[idx] = true
         node = graph[idx]
         node.edges.each do |edge|
-          if costs[edge.to.index] > edge.weight
+          if !visited[edge.to.index] && costs[edge.to.index] > edge.weight
             fathers[edge.to.index] = node.index
             update_cost.call(edge.to.index, edge.weight)
           end
@@ -38,6 +41,7 @@ module Graphos
       fathers.each_with_index do |f,c|
         if f
           result.add_edge(f, c, costs[c])
+          count += 1
         end
       end
       result
