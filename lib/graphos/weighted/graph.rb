@@ -7,6 +7,7 @@ module Graphos
       require "graphos/weighted/node"
       require "graphos/weighted/edge"
 
+
       def initialize size
         @nodes = (0..size-1).map{|i| Node.new i }
       end
