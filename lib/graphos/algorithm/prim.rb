@@ -12,6 +12,9 @@ module Graphos
 
       heap = BinaryHeap.new{|x,y| x.value <=> y.value}
       heap.push(initial, 0)
+      costs.each_with_index do |v,i|
+        heap.push(i,v)
+      end
 
       visited = Array.new(graph.size, false)
 
@@ -40,7 +43,6 @@ module Graphos
       fathers.each_with_index do |f,c|
         if f
           result.add_edge(f, c, costs[c])
-          count += 1
         end
       end
       result

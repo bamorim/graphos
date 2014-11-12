@@ -26,8 +26,9 @@ module Graphos
     def change key, new_value
       if has_key? key
         @values[key] = new_value
+        parent_val = @values[parent(@indexes[key])]
         move_up key
-        move_down key
+        heapify key
       end
     end
 
@@ -42,6 +43,7 @@ module Graphos
       if size > 0
         @keys[0] = last 
         @indexes[last] = 0
+        heapify last
       end
 
       result
@@ -49,6 +51,9 @@ module Graphos
 
     def size
       @keys.size
+    end
+
+    def ordered
     end
 
   private
@@ -66,19 +71,20 @@ module Graphos
       move_up key
     end
 
-    def move_down key
+    def heapify key
       left_key = @keys[left(@indexes[key])]
       right_key = @keys[right(@indexes[key])]
+
       return if !left_key && !right_key
 
-      max_key = [key, left_key, right_key].select{|x| !!x}.sort do |x,y|
+      min_key = [key, left_key, right_key].select{|x| !!x}.sort do |x,y|
         @compare.call(key_val(x), key_val(y))
       end.first
 
-      return if max_key == key
+      return if min_key == key
 
-      swap(@indexes[key], @indexes[max_key])
-      move_down max_key
+      swap(@indexes[key], @indexes[min_key])
+      heapify key
     end
 
     def move_up key
